@@ -39,3 +39,4 @@ data/photo_index.sqlite
 data/*.sqlite
 # Keep the data folder itself
 !data/.gitkeep
+data/photo_index.sqlite

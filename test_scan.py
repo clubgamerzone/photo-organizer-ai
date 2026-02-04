@@ -4,6 +4,7 @@ from pathlib import Path
 DB_PATH = Path(r"D:\My projects\photo-organizer-ai\data\photo_index.sqlite")
 conn = sqlite3.connect(str(DB_PATH))
 
+# add your folder path here
 folder_path = r"C:\Users\jay\Pictures\Work"
 include_subfolders = True
 max_files = 20  # test with just 20
