@@ -9,28 +9,33 @@ This guide teaches Python fundamentals through the actual code in your `photo-or
 ## 📚 Table of Contents
 
 1. [Project Overview](#-project-overview)
-2. [Python Basics](#-python-basics)
-   - [Variables and Data Types](#variables-and-data-types)
-   - [Functions (`def`)](#functions-def)
-   - [Type Hints (`: str`, `-> bool`)](#type-hints)
-   - [Imports](#imports)
-3. [Data Structures](#-data-structures)
-   - [Lists, Sets, Tuples, Dictionaries](#lists-sets-tuples-dictionaries)
-4. [Control Flow](#-control-flow)
-   - [If/Else, Loops, Comprehensions](#ifelse-loops-comprehensions)
-5. [Object-Oriented Python](#-object-oriented-python)
-   - [Classes and Dataclasses](#classes-and-dataclasses)
-   - [Decorators (`@`)](#decorators)
-6. [Working with Files](#-working-with-files)
-   - [The `pathlib` Module](#the-pathlib-module)
-7. [Databases with SQLite](#-databases-with-sqlite)
-   - [Connection (`conn`)](#connection-conn)
-   - [SQL Queries](#sql-queries)
-8. [AI Integration](#-ai-integration)
-   - [YOLO Object Detection](#yolo-object-detection)
-   - [BLIP Image Captioning](#blip-image-captioning)
-9. [Building a Web UI with Streamlit](#-building-a-web-ui-with-streamlit)
-10. [Project Architecture](#-project-architecture)
+2. [Quick Start and Setup](#-quick-start-and-setup)
+3. [Python Basics](#-python-basics)
+    - [Variables and Data Types](#variables-and-data-types)
+    - [Functions (`def`)](#functions-def)
+    - [Type Hints (`: str`, `-> bool`)](#type-hints)
+    - [Imports](#imports)
+4. [Data Structures](#-data-structures)
+    - [Lists, Sets, Tuples, Dictionaries](#lists-sets-tuples-dictionaries)
+5. [Control Flow](#-control-flow)
+    - [If/Else, Loops, Comprehensions](#ifelse-loops-comprehensions)
+6. [Object-Oriented Python](#-object-oriented-python)
+    - [Classes and Dataclasses](#classes-and-dataclasses)
+    - [Decorators (`@`)](#decorators)
+7. [Working with Files](#-working-with-files)
+    - [The `pathlib` Module](#the-pathlib-module)
+8. [Databases with SQLite](#-databases-with-sqlite)
+    - [Connection (`conn`)](#connection-conn)
+    - [SQL Queries](#sql-queries)
+9. [AI Integration](#-ai-integration)
+    - [YOLO Object Detection](#yolo-object-detection)
+    - [BLIP Image Captioning](#blip-image-captioning)
+10. [Building a Web UI with Streamlit](#-building-a-web-ui-with-streamlit)
+11. [Project Architecture](#-project-architecture)
+12. [VS Code Tips](#-vs-code-tips)
+13. [Troubleshooting](#-troubleshooting)
+14. [Glossary](#-glossary)
+15. [Next Steps](#-next-steps)
 
 ---
 
@@ -54,6 +59,49 @@ This project is a **local photo organizer** that:
 | `run_caption_blip.py` | Generates captions using BLIP AI |
 | `run_categories.py` | Auto-categorizes photos |
 | `ui_app.py` | The main Streamlit web interface |
+
+---
+
+## 🚀 Quick Start and Setup
+
+Windows (PowerShell):
+
+```powershell
+Push-Location "d:\My projects\photo-organizer-ai"
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+macOS/Linux (Terminal):
+
+```bash
+pushd "/Users/<you>/My projects/photo-organizer-ai"
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+Run the app steps:
+
+```powershell
+# Index photos
+python run_index.py
+
+# Optional AI enrich
+python run_objects.py
+python run_caption_blip.py
+python run_categories.py
+
+# UI
+streamlit run ui_app.py
+```
+
+Notes:
+- If you use the UI to pick the photos folder, you don’t need to set `photos_root` in `app/config.py`. If you run CLI scripts, set it there.
+- The SQLite DB lives under `data/photo_index.sqlite` and is re‑created if missing. Do not commit it to git.
 
 ---
 
@@ -805,6 +853,39 @@ if __name__ == "__main__":
 - When you run `python run_categories.py`, `__name__` is `"__main__"`, so `main()` runs
 - When you `import run_categories`, `__name__` is `"run_categories"`, so `main()` does NOT run
 - This lets you import functions from a file without executing the whole script
+
+---
+
+## 🧰 VS Code Tips
+
+- Open the folder: File → Open Folder → `photo-organizer-ai`
+- Select interpreter: Ctrl+Shift+P → “Python: Select Interpreter” → choose `.venv`
+- Run a script: Open `run_index.py` → F5 → “Python: Current File”
+- Terminal: View → Terminal → commands run inside the venv
+- Debugging: Set breakpoints, inspect variables in the Debug pane
+- Testing: Add `tests/` and run `pytest -q` in Terminal
+
+---
+
+## 🛠️ Troubleshooting
+
+- “Module not found”: Activate venv and install deps.
+- “CUDA unavailable”: Runs on CPU; install CUDA‑enabled PyTorch for GPU.
+- “Model download slow”: First run downloads; be patient.
+- “DB missing”: The app recreates it; keep it local and ignored by git.
+- “Path mismatch”: If you use CLI, set `photos_root` in `app/config.py`. If you use the UI to select the path, config can be omitted.
+- macOS build tools: `xcode-select --install`; for OpenMP: `brew install libomp`.
+
+---
+
+## 📖 Glossary
+
+- REPL: interactive Python console
+- venv: isolated Python environment
+- Path: object representing file paths
+- Dataclass: class with auto‑generated `__init__`, `__repr__`, etc.
+- SQL: database language
+- GPU/MPS: hardware accelerators for AI (CUDA for NVIDIA; MPS for Apple)
 
 ---
 
