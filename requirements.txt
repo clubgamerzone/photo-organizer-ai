@@ -1,0 +1,6 @@
+pillow
+tqdm
+ultralytics
+transformers
+accelerate
+opencv-python
