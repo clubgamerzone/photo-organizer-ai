@@ -33,3 +33,9 @@ Thumbs.db
 
 # Large model/binary files
 yolov8n.pt
+
+# Local SQLite databases (generated)
+data/photo_index.sqlite
+data/*.sqlite
+# Keep the data folder itself
+!data/.gitkeep
