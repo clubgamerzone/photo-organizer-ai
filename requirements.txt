@@ -4,3 +4,5 @@ ultralytics
 transformers
 accelerate
 opencv-python
+streamlit
+send2trash

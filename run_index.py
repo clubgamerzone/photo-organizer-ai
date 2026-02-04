@@ -3,8 +3,6 @@ from app.db import connect, init_db
 from app.indexer import scan_and_save_photos
 from app.db import init_ai_tables
 
-init_ai_tables(conn)
-
 def main():
     cfg = default_config()
 
@@ -13,6 +11,7 @@ def main():
 
     conn = connect(cfg.db_path)
     init_db(conn)
+    init_ai_tables(conn)
 
     total = scan_and_save_photos(cfg.photos_root, conn)
 
